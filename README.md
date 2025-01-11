@@ -98,4 +98,4 @@ This lab simulates realistic wireless networking scenarios to teach key cybersec
 
 ## Documentation
 
-For detailed instructions and step-by-step guidance, refer to the [Wireless Attack and Mitigation Techniques Guide](https://github.com/StephVergil/Cybersecurity-Projects/blob/main/Wireless%20Networking%20Attack%20and%20Mitigation%20Techniques-Stephanie%E2%80%99s%20MacBook%20Pro.docx).
+For detailed instructions and step-by-step guidance, refer to the [Wireless Networking Attack and Mitigation Techniques](https://github.com/StephVergil/Wireless-Networking-Attack-and-Mitigation-Techniques/blob/main/Wireless%20Networking%20Attack%20and%20Mitigation%20Techniques-Stephanie’s%20MacBook%20Pro.docx)
