@@ -2,126 +2,141 @@
 
 ## Overview
 
-This project investigates the vulnerabilities of wireless networks by analyzing traffic, exploiting encryption weaknesses, and proposing mitigation strategies. It focuses on exposing the risks of outdated security protocols such as WEP and WPA, while emphasizing the importance of adopting strong encryption and secure configurations.
+This project delves into the vulnerabilities of wireless networks, exposing the risks posed by outdated encryption protocols such as WEP and WPA. By analyzing traffic, exploiting encryption weaknesses, and demonstrating mitigation techniques, it provides a comprehensive understanding of wireless security.
 
-Using tools like **Wireshark** and **Aircrack-ng**, this project demonstrates how attackers exploit wireless networks and highlights practical measures to defend against such attacks.
+Using tools like **Wireshark**, **Aircrack-ng**, and **Kali Linux**, this project simulates real-world attack scenarios to illustrate how adversaries exploit wireless networks and how these threats can be mitigated effectively.
 
 ---
 
 ## Key Features
 
 1. **Plain Text Traffic Analysis**:
-   - Examine unencrypted wireless traffic for vulnerabilities.
-   - Extract sensitive data, such as files, credentials, and images, from intercepted packets.
+   - Demonstrate the risks of unencrypted data transmission in wireless networks.
+   - Recover sensitive information such as credentials, files, and images from intercepted traffic.
 
 2. **WEP Encryption Exploitation**:
-   - Crack WEP encryption keys using dictionary and brute-force attacks.
-   - Decrypt captured traffic to reveal user activities and data.
+   - Analyze the inherent weaknesses of WEP encryption.
+   - Execute dictionary and brute-force attacks to recover encryption keys.
+   - Decrypt and analyze intercepted traffic for sensitive user data.
 
 3. **WPA Encryption Exploitation**:
-   - Perform dictionary attacks to recover WPA passphrases.
-   - Decrypt and analyze WPA traffic for DNS, HTTP, and FTP data.
+   - Explore vulnerabilities in WPA passphrase-based authentication.
+   - Perform dictionary attacks to recover passphrases.
+   - Analyze decrypted WPA traffic for DNS, HTTP, and FTP communication.
 
-4. **Mitigation Techniques**:
-   - Outline strategies for strengthening wireless network security.
-   - Demonstrate the importance of transitioning from insecure protocols to robust encryption mechanisms.
+4. **Mitigation Strategies**:
+   - Propose techniques for securing wireless networks using modern encryption protocols.
+   - Highlight best practices to defend against common wireless attacks.
 
 ---
 
 ## Lab Steps Overview
 
-### **1. Examining Plain Text Traffic**
-- **Task**: Analyze unencrypted traffic to uncover vulnerabilities.
+### **1. Plain Text Traffic Analysis**
+- **Objective**: Understand the risks of unencrypted wireless communication.
 - **Steps**:
-  - Use Wireshark to inspect DNS queries and HTTP objects.
-  - Export and view sensitive files like images and ZIP archives from traffic captures.
+  - Open `.cap` files in Wireshark to inspect DNS queries and HTTP traffic.
+  - Use the `Export Objects` feature in Wireshark to recover files (e.g., images or zip archives) from captured traffic.
 
 ### **2. Exploiting WEP Traffic**
-- **Task**: Crack WEP encryption and analyze decrypted traffic.
+- **Objective**: Demonstrate the vulnerabilities of WEP encryption.
 - **Steps**:
-  - Use Aircrack-ng to recover WEP keys and decrypt traffic with Airdecap-ng.
-  - Analyze DNS, HTTP, and FTP data in Wireshark to extract sensitive information.
+  - Use Aircrack-ng to recover WEP keys:
+    ```bash
+    aircrack-ng ~/captures/WEP.cap -w /path/to/wordlist
+    ```
+  - Decrypt the traffic using Airdecap-ng:
+    ```bash
+    airdecap-ng -w <WEP_KEY> ~/captures/WEP.cap
+    ```
+  - Load decrypted `.cap` files in Wireshark to analyze DNS, HTTP, and FTP data.
 
 ### **3. Exploiting WPA Traffic**
-- **Task**: Crack WPA passphrases and analyze decrypted traffic.
+- **Objective**: Explore weaknesses in WPA passphrase-based security.
 - **Steps**:
-  - Perform dictionary attacks with Aircrack-ng.
-  - Decrypt traffic using Airdecap-ng and analyze HTTP and FTP data in Wireshark.
+  - Perform a dictionary attack to recover WPA passphrases:
+    ```bash
+    aircrack-ng ~/captures/WPA.cap -w /usr/share/wordlists/rockyou.txt
+    ```
+  - Decrypt the traffic using Airdecap-ng:
+    ```bash
+    airdecap-ng -p <PASSPHRASE> -e <SSID> ~/captures/WPA.cap
+    ```
+  - Analyze the decrypted traffic in Wireshark to extract HTTP objects and FTP transfers.
+
+### **4. Mitigation Techniques**
+- **Objective**: Evaluate strategies to secure wireless networks.
+- **Steps**:
+  - Implement WPA3 encryption to replace outdated protocols.
+  - Enable network segmentation and VLANs to minimize attack surfaces.
+  - Use strong passphrases and regularly update credentials.
+  - Deploy intrusion detection systems to monitor suspicious wireless activity.
 
 ---
 
 ## Tools and Technologies
 
-1. **Wireshark**: For capturing and analyzing network traffic.
-2. **Aircrack-ng Suite**:
-   - **Aircrack-ng**: To crack WEP/WPA keys.
-   - **Airdecap-ng**: To decrypt captured wireless traffic.
-3. **Kali Linux**: An essential platform for executing network attacks and analyses.
+- **Wireshark**: Packet capture and analysis.
+- **Aircrack-ng Suite**:
+  - **Aircrack-ng**: Crack WEP/WPA encryption keys.
+  - **Airdecap-ng**: Decrypt captured network traffic.
+- **Kali Linux**: Penetration testing and network security platform.
+- **Wordlists**: Predefined password lists (e.g., `rockyou.txt`) for dictionary attacks.
 
 ---
 
 ## Learning Objectives
 
 1. **Traffic Analysis**:
-   - Understand the risks of transmitting unencrypted data.
-   - Learn how attackers extract sensitive information from network traffic.
+   - Identify vulnerabilities in unencrypted wireless traffic.
+   - Recover sensitive data from captured packets.
 
-2. **Encryption Vulnerabilities**:
-   - Explore the weaknesses of WEP and WPA protocols.
-   - Gain hands-on experience with tools used to exploit these vulnerabilities.
+2. **Encryption Weaknesses**:
+   - Analyze the limitations of WEP and WPA protocols.
+   - Demonstrate how attackers exploit these vulnerabilities.
 
-3. **Mitigation Techniques**:
-   - Learn how to secure wireless networks using modern encryption standards.
-   - Understand best practices for preventing unauthorized access and data breaches.
+3. **Defensive Strategies**:
+   - Learn how to implement modern encryption standards like WPA3.
+   - Understand the importance of secure network configurations and monitoring.
 
 ---
 
 ## Real-World Applications
 
-This project simulates real-world scenarios to educate on cybersecurity fundamentals:
-- **Data Privacy**: Highlights the need for encrypted communication to safeguard sensitive data.
-- **Protocol Evolution**: Demonstrates why older protocols like WEP are obsolete and insecure.
-- **Incident Response**: Provides insights into monitoring, detecting, and mitigating network attacks.
+1. **Data Privacy**: Highlight the risks of unencrypted communication and the need for robust encryption protocols.
+2. **Protocol Security**: Demonstrate why outdated protocols like WEP are unsuitable for modern networks.
+3. **Incident Response**: Teach the tools and techniques required for monitoring, detecting, and mitigating network-based threats.
 
 ---
 
 ## Setup and Usage
 
 ### **Prerequisites**
-- Install **Kali Linux** with the required tools (Wireshark, Aircrack-ng suite).
-- Download the traffic capture files used for analysis.
+- Install **Kali Linux** and ensure required tools (Wireshark, Aircrack-ng suite) are available.
+- Download the provided `.cap` files for analysis.
 
-### **How to Run the Lab**
-1. **Inspect Captured Traffic**:
-   - Open `.cap` files in Wireshark and use filters like `dns`, `http`, and `ftp` to explore data.
-   - Export files using Wireshark's `Export Objects` feature.
+### **Execution**
+1. **Analyze Captured Traffic**:
+   - Open `.cap` files in Wireshark to inspect DNS and HTTP traffic.
+   - Use filtering options (e.g., `http`, `dns`) to narrow down results.
 
-2. **Crack WEP/WPA Keys**:
-   - Use Aircrack-ng to recover encryption keys:
+2. **Recover Encryption Keys**:
+   - Use Aircrack-ng to crack WEP and WPA keys:
      ```bash
      aircrack-ng <capture_file> -w <wordlist>
      ```
-   - Decrypt traffic using Airdecap-ng:
-     ```bash
-     airdecap-ng -w <key> <capture_file>
-     ```
+   - Decrypt traffic with Airdecap-ng.
 
-3. **Analyze Decrypted Traffic**:
-   - Load decrypted `.cap` files into Wireshark for further inspection.
-   - Extract and analyze data to understand user activities.
+3. **Mitigation Testing**:
+   - Implement secure encryption protocols (e.g., WPA3).
+   - Deploy network monitoring and intrusion detection tools.
 
 ---
 
 ## Documentation
 
-For step-by-step guidance, refer to the detailed project documentation:
+For detailed step-by-step instructions, refer to the full project documentation:  
 [Wireless Networking Attack and Mitigation Techniques](https://github.com/StephVergil/Wireless-Networking-Attack-and-Mitigation-Techniques/blob/main/Wireless%20Networking%20Attack%20and%20Mitigation%20Techniques-Stephanie%E2%80%99s%20MacBook%20Pro.docx)
-
----
-
-### Disclaimer
-
-This project was conducted in a controlled environment for educational purposes. Unauthorized use of these techniques or tools outside of ethical and legal guidelines may lead to violations of cybersecurity laws and regulations.
 
 ---
 
@@ -130,6 +145,12 @@ This project was conducted in a controlled environment for educational purposes.
 1. **Wireshark Documentation**: [https://www.wireshark.org/docs/](https://www.wireshark.org/docs/)
 2. **Aircrack-ng Documentation**: [https://www.aircrack-ng.org/documentation.html](https://www.aircrack-ng.org/documentation.html)
 3. **Kali Linux**: [https://www.kali.org/](https://www.kali.org/)
+
+---
+
+## Disclaimer
+
+This project was conducted in a controlled environment for educational purposes only. Unauthorized use of these techniques or tools outside of legal and ethical boundaries may result in violations of cybersecurity laws. Always seek proper permissions before conducting such activities.
 
 ---
 
